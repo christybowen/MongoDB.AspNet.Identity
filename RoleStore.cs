@@ -13,7 +13,6 @@ using MongoDB.Driver.Builders;
 namespace MongoDB.AspNet.Identity
 {
 
-
     public class RoleStore<TRole> : RoleStore<TRole, string, IdentityUserRole>, IQueryableRoleStore<TRole>, IQueryableRoleStore<TRole, string>, IRoleStore<TRole, string>, IDisposable
     where TRole : IdentityRole, new()
     {
@@ -29,6 +28,10 @@ namespace MongoDB.AspNet.Identity
         private readonly MongoDatabase db;
         private const string collectionName = "AspNetRoles";
 
+        public RoleStore(IdentityDbContext context)
+        {
+            db = context.db;
+        }
 
         public RoleStore(MongoDatabase context)
         {

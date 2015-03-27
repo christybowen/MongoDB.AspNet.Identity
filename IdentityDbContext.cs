@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Linq;
 using MongoDB.Driver;
 
+
 namespace MongoDB.AspNet.Identity
 {
     public class IdentityDbContext<TUser> : IdentityDbContext<TUser, IdentityRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
@@ -95,6 +96,8 @@ namespace MongoDB.AspNet.Identity
             get;
             set;
         }
+
+
 
         public IdentityDbContext() : this("DefaultConnection") { }
         public IdentityDbContext(string nameOrConnectionString)

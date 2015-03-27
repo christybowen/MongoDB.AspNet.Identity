@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Microsoft.AspNet.Identity;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace MongoDB.AspNet.Identity
 {
@@ -9,7 +11,8 @@ namespace MongoDB.AspNet.Identity
     {
         public IdentityRole()
         {
-            base.Id = Guid.NewGuid().ToString();
+            var newId = ObjectId.GenerateNewId();
+            base.Id = newId.ToString();
         }
 
         public IdentityRole(string roleName)
@@ -23,6 +26,8 @@ namespace MongoDB.AspNet.Identity
     public class IdentityRole<TKey, TUserRole> : IRole<TKey>
         where TUserRole : IdentityUserRole<TKey>
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public TKey Id { get; set; }
         public string Name { get; set; }
 
